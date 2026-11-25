@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="signup.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <title>DataWizard - Sign up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="i18n.js"></script>
+</head>
+
+<body>
+  <div id="toastContainer" class="toast-container"></div>
+  <div id="signupModal" class="modal" style="display: flex;">
+
+    <div class="modal-content">
+
+      <a href="home2.html" class="close-modal">&times;</a>
+
+      <div class="title" data-i18n="signUpTitle">Sign Up</div>
+      <div class="subtitle" data-i18n="signUpSubtitle">Let's get started with your 30 days free trial</div>
+
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="name" data-i18n="name">Name</label>
+          <input type="text" id="name" data-i18n-placeholder="namePlaceholder" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email" data-i18n="email">Email</label>
+          <input type="email" id="email" data-i18n-placeholder="emailPlaceholder" placeholder="Enter your email"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="password" data-i18n="password">Password</label>
+          <input type="password" id="password" data-i18n-placeholder="passPlaceholder" placeholder="Enter password"
+            required>
+          <div class="password-requirements">
+            <div class="legend-item" id="req-length">
+              <span class="legend-dot"></span>
+              <span data-i18n="passConditions1">At least 8 characters</span>
+            </div>
+            <div class="legend-item" id="req-uppercase">
+              <span class="legend-dot"></span>
+              <span data-i18n="passConditions2">At least one uppercase letter</span>
+            </div>
+            <div class="legend-item" id="req-lowercase">
+              <span class="legend-dot"></span>
+              <span data-i18n="passConditions3">At least one lowercase letter</span>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="signup-btn" data-i18n="signUpBtn">Sign Up</button>
+      </form>
+
+      <p class="already"><span data-i18n="alreadyAccount">Already have an account?</span> <a href="login.html"
+          data-i18n="logInLink">Log In</a></p>
+      <br>
+
+      <p class="terms"><span data-i18n="termsText">By signing up, you agree to our</span> <a href="#"
+          data-i18n="termsOfUse">Terms of Use</a> <span data-i18n="andWord">and</span> <a href="#"
+          data-i18n="privacyPolicy">Privacy Policy</a>.</p>
+
+    </div>
+  </div>
+
+  <script>
+    // دالة إظهار الـ Toast المرتبة
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `dw-toast ${type}`;
+      
+      const icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
+      
+      toast.innerHTML = `
+        <i class="fa-solid ${icon}"></i>
+        <span class="toast-message">${message}</span>
+      `;
+      
+      container.appendChild(toast);
+      
+      // أنيميشن الدخول
+      setTimeout(() => toast.classList.add('show'), 50);
+      
+      // الحذف التلقائي بعد 4 ثوانٍ
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+      }, 4000);
+    }
+
+    // دالة فحص شروط كلمة المرور وإضافة كلاس met للتحول للأخضر
+    const passwordInput = document.getElementById('password');
+    passwordInput.addEventListener('input', function() {
+      const value = this.value;
+      
+      const checks = {
+        length: value.length >= 8,
+        uppercase: /[A-Z]/.test(value),
+        lowercase: /[a-z]/.test(value),
+        digit: /[0-9]/.test(value)
+      };
+
+      document.getElementById('req-length').classList.toggle('met', checks.length);
+      document.getElementById('req-uppercase').classList.toggle('met', checks.uppercase);
+      document.getElementById('req-lowercase').classList.toggle('met', checks.lowercase);
+      document.getElementById('req-digit').classList.toggle('met', checks.digit);
+    });
+
+    // حدث إرسال الفورم
+    document.getElementById("signupForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      // التأكد من استيفاء جميع الشروط قبل الإرسال
+      const password = passwordInput.value;
+      const isPasswordValid = password.length >= 8 && /[A-Z]/.test(password) && /[a-z]/.test(password) && /[0-9]/.test(password);
+      
+      if (!isPasswordValid) {
+        showToast("Please meet all password requirements first.", "error");
+        return;
+      }
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+
+      const btn = this.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Creating account...`;
+      btn.disabled = true;
+
+      try {
+        const res = await fetch("http://127.0.0.1:8000/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast(data.detail || "Signup failed", "error");
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+          return;
+        }
+
+        showToast("Account created successfully! Redirecting...", "success");
+        
+        setTimeout(() => {
+          window.location.href = "login.html";
+        }, 2000);
+
+      } catch (err) {
+        showToast("Server error. Please try again later.", "error");
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    });
+  </script>

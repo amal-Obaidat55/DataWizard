@@ -1,0 +1,82 @@
+{
+    "report_id": "4b11d7e3-b5dd-422d-87fe-f2c85fc7714d",
+    "file_info": {
+        "file_id": "a7e0c0e4",
+        "original_name": "DataWizard_Forecasting_Sample.xlsx",
+        "file_size_mb": 0.01,
+        "uploaded_at": "2026-05-19T15:51:20.255532"
+    },
+    "analysis_count": 4,
+    "generated_at": "2026-05-19T19:14:20.187143",
+    "analyses": [
+        {
+            "analysis_id": 745,
+            "analysis_type": "advanced_analysis",
+            "status": "completed",
+            "date_time": "2026-05-19T15:51:25.888782",
+            "summary": {
+                "total_rows": 9,
+                "total_columns": 10,
+                "quality_score": 90.0,
+                "warnings": [
+                    "High variance detected in 'Unit_Price'",
+                    "High variance detected in 'Discount_Amount'"
+                ],
+                "insights": [
+                    "Excellent data quality"
+                ]
+            }
+        },
+        {
+            "analysis_id": 744,
+            "analysis_type": "advanced_analysis",
+            "status": "completed",
+            "date_time": "2026-05-19T15:51:25.181063",
+            "summary": {
+                "total_rows": 9,
+                "total_columns": 10,
+                "quality_score": 90.0,
+                "warnings": [
+                    "High variance detected in 'Unit_Price'",
+                    "High variance detected in 'Discount_Amount'"
+                ],
+                "insights": [
+                    "Excellent data quality"
+                ]
+            }
+        },
+        {
+            "analysis_id": 743,
+            "analysis_type": "advanced_analysis",
+            "status": "completed",
+            "date_time": "2026-05-19T15:51:23.990987",
+            "summary": {
+                "total_rows": 9,
+                "total_columns": 10,
+                "quality_score": 90.0,
+                "warnings": [
+                    "High variance detected in 'Unit_Price'",
+                    "High variance detected in 'Discount_Amount'"
+                ],
+                "insights": [
+                    "Excellent data quality"
+                ]
+            }
+        },
+        {
+            "analysis_id": 742,
+            "analysis_type": "basic",
+            "status": "completed",
+            "date_time": "2026-05-19T15:51:23.439251",
+            "summary": {
+                "total_rows": 0,
+                "total_columns": 0,
+                "quality_score": 0,
+                "warnings": [
+                    "Low data quality"
+                ],
+                "insights": []
+            }
+        }
+    ]
+}

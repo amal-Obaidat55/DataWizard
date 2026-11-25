@@ -1,0 +1,66 @@
+{
+    "report_id": "30f5ecad-7374-453b-ad00-01af933df6b9",
+    "file_info": {
+        "file_id": "2268c829",
+        "original_name": "Sample22.csv",
+        "file_size_mb": 2.18,
+        "uploaded_at": "2026-05-19T11:20:58.123857"
+    },
+    "analysis_count": 3,
+    "generated_at": "2026-05-19T18:39:10.229964",
+    "analyses": [
+        {
+            "analysis_id": 721,
+            "analysis_type": "advanced_analysis",
+            "status": "completed",
+            "date_time": "2026-05-19T11:21:30.489765",
+            "summary": {
+                "total_rows": 9994,
+                "total_columns": 21,
+                "quality_score": 100.0,
+                "warnings": [
+                    "High variance detected in 'Sales'",
+                    "High variance detected in 'Discount'",
+                    "High variance detected in 'Profit'"
+                ],
+                "insights": [
+                    "Excellent data quality"
+                ]
+            }
+        },
+        {
+            "analysis_id": 720,
+            "analysis_type": "advanced_analysis",
+            "status": "completed",
+            "date_time": "2026-05-19T11:21:03.864940",
+            "summary": {
+                "total_rows": 9994,
+                "total_columns": 21,
+                "quality_score": 100.0,
+                "warnings": [
+                    "High variance detected in 'Sales'",
+                    "High variance detected in 'Discount'",
+                    "High variance detected in 'Profit'"
+                ],
+                "insights": [
+                    "Excellent data quality"
+                ]
+            }
+        },
+        {
+            "analysis_id": 719,
+            "analysis_type": "basic",
+            "status": "completed",
+            "date_time": "2026-05-19T11:21:01.842442",
+            "summary": {
+                "total_rows": 0,
+                "total_columns": 0,
+                "quality_score": 0,
+                "warnings": [
+                    "Low data quality"
+                ],
+                "insights": []
+            }
+        }
+    ]
+}
